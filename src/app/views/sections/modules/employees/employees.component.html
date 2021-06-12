@@ -1,0 +1,27 @@
+<li class="nav-item active" *ngIf="active == true">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
+        aria-expanded="true" aria-controls="collapseEmployee">
+        <i></i>
+        <span>Employees</span>
+    </a>
+    <div id="collapseEmployee" class="collapse show" aria-labelledby="headingEmployee" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item active" *ngIf="opt1 == true" routerLink="/in-out-register">In/Out Register</a>
+            <a class="collapse-item" *ngIf="opt1 == false" routerLink="/in-out-register">In/Out Register</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item" *ngIf="active == false">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
+        aria-expanded="true" aria-controls="collapseEmployee">
+        <i></i>
+        <span>Employees</span>
+    </a>
+    <div id="collapseEmployee" class="collapse" aria-labelledby="headingEmployee" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" routerLink="/in-out-register">In/Out Register</a>
+            
+        </div>
+    </div>
+</li>
