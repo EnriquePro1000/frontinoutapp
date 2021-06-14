@@ -23,7 +23,19 @@ export class UsersService {
     return this.http.get<ResponseI>(url,{headers});
   }
 
-  DeleteUser(id:any):Observable<ResponseI>{
+  GetUser(id:string):Observable<UserI>{
+    let url = this.api.url + "getUser/"+id;
+    let headers  = this.api.headers();
+    return this.http.get<UserI>(url,{headers});
+  }
+
+  EditUser(id:string,form:UserI):Observable<ResponseI>{
+    let url = this.api.url + "editUser/"+id;
+    let headers  = this.api.headers();
+    return this.http.post<ResponseI>(url,form,{headers});
+  }
+
+  DeleteUser(id:string):Observable<ResponseI>{
     let url = this.api.url + "deleteUser/"+id;
     let headers  = this.api.headers();
     return this.http.get<ResponseI>(url,{headers});

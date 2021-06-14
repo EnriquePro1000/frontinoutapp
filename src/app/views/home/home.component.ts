@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/api/users/users.service';
 import { ResponseI } from '../../interfaces/response.interface';
+import { UserI } from '../../interfaces/user.interface';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
@@ -55,5 +56,23 @@ export class HomeComponent implements OnInit {
         }
       })
     }
+  }
+
+  onEdit(id:any){
+    this.api.GetUser(id).subscribe(data => {
+      let dataResponse:UserI = data;
+      localStorage.setItem("EUCI",JSON.stringify(dataResponse.countryid))
+      localStorage.setItem("EUTI",JSON.stringify(dataResponse.typeid))
+      localStorage.setItem("EUNI",JSON.stringify(dataResponse.numberid))
+      localStorage.setItem("EUFN",JSON.stringify(dataResponse.firstname))
+      localStorage.setItem("EUON",JSON.stringify(dataResponse.othername))
+      localStorage.setItem("EUFLN",JSON.stringify(dataResponse.flastname))
+      localStorage.setItem("EUSLN",JSON.stringify(dataResponse.slastname))
+      localStorage.setItem("EUAI",JSON.stringify(dataResponse.areaid))
+      this.router.navigate(['/edit-user',id]);
+    })
+   
+    
+
   }
 }

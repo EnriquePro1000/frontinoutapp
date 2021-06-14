@@ -12,4 +12,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  chargeHome() {
+    window.location.href="/home"
+  }
+
 }

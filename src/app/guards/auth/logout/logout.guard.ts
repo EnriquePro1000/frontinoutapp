@@ -13,14 +13,9 @@ export class LogoutGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(localStorage.getItem("logged") !== "true" ) {
-     
-       
-        this.router.navigate(['login']);
-return false;
-      //  alert("bloqueado")
-   
-      //  this.LoggedIn.true = true;
+      if(localStorage.getItem('auth.token') == 'undefined') {
+        this.router.navigate(['home']);
+        return false;
       } else{
         
        

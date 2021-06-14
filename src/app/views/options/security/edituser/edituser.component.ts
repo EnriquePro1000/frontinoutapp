@@ -3,39 +3,39 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ResponseI } from '../../../../interfaces/response.interface';
 import { UserI } from '../../../../interfaces/user.interface';
 import { UsersService } from '../../../../services/api/users/users.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-edituser',
   templateUrl: './edituser.component.html',
   styleUrls: ['./edituser.component.css']
 })
 export class EdituserComponent implements OnInit {
-
   date = new Date((new Date().getTime()));
-  RegisterUserForm = new FormGroup({
-    countryid: new FormControl('',Validators.required),
-    typeid : new FormControl('',Validators.required),
-    numberid : new FormControl('',Validators.pattern(/^[a-zA-Z0-9-]+$/)),
-    firstname: new FormControl('',[Validators.pattern(/^[a-zA-Z ]+$/)]),
-    othername: new FormControl('',Validators.pattern(/^[a-zA-Z ]+$/)),
-    flastname: new FormControl('',Validators.pattern(/^[a-zA-Z ]+$/)),
-    slastname: new FormControl('',Validators.pattern(/^[a-zA-Z ]+$/)),
-    areaid: new FormControl('',Validators.required),
-    registerdate : new FormControl(this.date.toLocaleDateString('en-CA'),Validators.required)
-})
+  EditUserForm = new FormGroup({
+    countryid: new FormControl(localStorage.getItem("EUCI"), Validators.required),
+    typeid: new FormControl(localStorage.getItem("EUTI"), Validators.required),
+    numberid: new FormControl(localStorage.getItem("EUNI")?.replace(/['"]+/g, ''), [Validators.required, Validators.pattern(/^[a-zA-Z0-9-]+$/)]),
+    firstname: new FormControl(localStorage.getItem("EUFN")?.replace(/['"]+/g, ''), [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
+    othername: new FormControl(localStorage.getItem("EUON")?.replace(/['"]+/g, ''), Validators.pattern(/^[a-zA-Z ]+$/)),
+    flastname: new FormControl(localStorage.getItem("EUFLN")?.replace(/['"]+/g, ''), [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
+    slastname: new FormControl(localStorage.getItem("EUSLN")?.replace(/['"]+/g, ''), [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
+    areaid: new FormControl(localStorage.getItem("EUAI"), Validators.required),
+    registerdate: new FormControl(this.date.toLocaleDateString('en-CA'), Validators.required)
+  })
 
-error:boolean = false;
-exit:boolean = false;
+  error: boolean = false;
+  exit: boolean = false;
   msj = "";
-  
-  constructor(private users:UsersService, private router:Router) { }
-  typeids:any = null;
-  areas:any = null;
-  countries:any = null;
+
+  constructor(private api: UsersService, private router: Router, private route: ActivatedRoute) { }
+  typeids: any = null;
+  areas: any = null;
+  countries: any = null;
+  user: any = null;
+  id: any = null;
 
   ngOnInit(): void {
-    localStorage.setItem("view","home")
-    
+    localStorage.setItem("view", "home")
     this.typeids = localStorage.getItem("typeids")
     this.typeids = JSON.parse(this.typeids)
     this.areas = localStorage.getItem("areas")
@@ -44,42 +44,37 @@ exit:boolean = false;
     this.countries = JSON.parse(this.countries)
   }
 
-  onRegisterUser(form:UserI){
-    this.users.RegisterUser(form).subscribe(data => {
-      let dataResponse:ResponseI = data;
-      //console.log(data);
-      if(dataResponse.status == "200"){
+  onEditUser(form: UserI) {
+    this.route.paramMap.subscribe(params => {
+      if (params.has("id")) {
+        this.id = (params.get("id"))
+
+      }
+    })
+
+    this.api.EditUser(this.id, form).subscribe(data => {
+      let dataResponse: ResponseI = data;
+      if (dataResponse.status == "200") {
         this.error = false;
         this.exit = true;
         this.msj = dataResponse.result;
-        this.users.GetAllUsers().subscribe(data => {
-          let dataResponse:ResponseI = data;
-          localStorage.setItem("users",JSON.stringify(dataResponse.users))
+
+        this.api.GetAllUsers().subscribe(data => {
+          let dataResponse: ResponseI = data;
+          localStorage.setItem("users", JSON.stringify(dataResponse.users))
+          setTimeout('window.location.href="/home"', 500);
         })
-        //this.RegisterUserForm.reset()
-        setTimeout('window.location.reload()',500);
-        console.log(data);     
-        //this.router.navigate(['home']);                 
-    }
-    if(dataResponse.status == "204"){
-      this.error = true;
-      this.exit = false;
-      this.msj = dataResponse.result;
-   
 
-      
-      console.log(data);                 
-  }
-
+      }
+      if (dataResponse.status == "204") {
+        this.error = true;
+        this.exit = false;
+        this.msj = dataResponse.result;
+      }
     });
-
-
   }
 
-  clear(){
-    this.RegisterUserForm.reset()
+  clear() {
+    this.EditUserForm.reset()
   }
-
-  
-
 }

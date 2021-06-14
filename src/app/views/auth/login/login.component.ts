@@ -12,7 +12,7 @@ import { LoginI } from '../../../interfaces/login.interface';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private login: LoginService, private router: Router) { }
+  constructor(private api: LoginService, private router: Router) { }
 
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -23,25 +23,21 @@ export class LoginComponent implements OnInit {
   msj = "";
 
   ngOnInit(): void {
-    localStorage.setItem("view", "login");
-    localStorage.setItem("logged", "false");
   }
 
   onLogin(form: LoginI) {
 
-    this.login.loginByEmail(form).subscribe(data => {
+    this.api.loginByEmail(form).subscribe(data => {
       let dataResponse: ResponseI = data;
 
       if (dataResponse.status == "200") {
-        localStorage.setItem("token", dataResponse.token);
-        localStorage.setItem("logged", "true");
-        localStorage.setItem("user", JSON.stringify(dataResponse.user));
+        localStorage.setItem("auth.token", dataResponse.token);
+        localStorage.setItem("current.user", JSON.stringify(dataResponse.user));
         localStorage.setItem("typeids", JSON.stringify(dataResponse.typeids))
         localStorage.setItem("areas", JSON.stringify(dataResponse.areas))
         localStorage.setItem("countries", JSON.stringify(dataResponse.countries))
         localStorage.setItem("users", JSON.stringify(dataResponse.users))
-        this.msj = "the login was successfully";
-        this.router.navigate(['home']);
+        window.location.href="/home"
       }
 
       if (dataResponse.status == "204") {

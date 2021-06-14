@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import {UnauthorizedInterceptor} from './interceptors/unauthorized.interceptor'
 
 import { LoginComponent } from './views/auth/login/login.component';
 import { HomeComponent } from './views/home/home.component';
@@ -16,6 +17,7 @@ import { SecurityComponent } from './views/sections/modules/security/security.co
 import { EmployeesComponent } from './views/sections/modules/employees/employees.component';
 import { CreatenewuserComponent } from './views/options/security/createnewuser/createnewuser.component';
 import { EdituserComponent } from './views/options/security/edituser/edituser.component';
+import { ErrorTailorModule } from '@ngneat/error-tailor';
 
 @NgModule({
   declarations: [
@@ -38,8 +40,22 @@ import { EdituserComponent } from './views/options/security/edituser/edituser.co
     HttpClientModule,
     BrowserModule,
     FormsModule,
+    ErrorTailorModule.forRoot({
+      errors: {
+        useValue: {
+          required: 'Campo requerido',
+          pattern: 'Caracteres no permitidos',
+        }
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: UnauthorizedInterceptor,
+      multi   : true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

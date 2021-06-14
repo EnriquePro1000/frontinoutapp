@@ -5,20 +5,6 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/home">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
             <app-sidebar></app-sidebar>
         </ul>
         <!-- End of Sidebar -->
@@ -49,7 +35,10 @@
                             </span>
                         </div>
 
-                        <form [formGroup]="RegisterUserForm" (ngSubmit)="onRegisterUser(RegisterUserForm.value)">
+                        <form [formGroup]="EditUserForm"  (ngSubmit)="onEditUser(EditUserForm.value)"
+                            errorTailor>
+
+                     
 
                             <div class="form-group">
                                 País*
@@ -75,9 +64,6 @@
                                     identificación*
                                     <input id="numberid" type="text" class="form-control" formControlName="numberid"
                                         autofocus maxlength="20">
-                                    <div *ngIf="RegisterUserForm.get('numberid')?.invalid">
-                                        <p style="color:red;">caracter(es) no permitido(s)</p>
-                                    </div>
                                 </div>
                             </div>
 
@@ -85,20 +71,14 @@
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     Primer nombre*
                                     <input id="firstname" type="text" class="form-control" formControlName="firstname"
-                                        autofocus maxlength="20"
+                                        autofocus maxlength="20" 
                                         onkeyup="javascript:this.value=this.value.toUpperCase()">
-                                    <div *ngIf="RegisterUserForm.get('firstname')?.invalid">
-                                        <p style="color:red;">caracter(es) no permitido(s)</p>
-                                    </div>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     Otros nombres
                                     <input id="othername" type="text" class="form-control" formControlName="othername"
                                         autofocus maxlength="50"
                                         onkeyup="javascript:this.value=this.value.toUpperCase()">
-                                    <div *ngIf="RegisterUserForm.get('othername')?.invalid">
-                                        <p style="color:red;">caracter(es) no permitido(s)</p>
-                                    </div>
                                 </div>
                             </div>
 
@@ -106,20 +86,13 @@
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     Primer Apellido*
                                     <input id="flastname" type="text" class="form-control" formControlName="flastname"
-                                        autofocus maxlength="20"
-                                        onkeyup="javascript:this.value=this.value.toUpperCase()">
-                                    <div *ngIf="RegisterUserForm.get('flastname')?.invalid">
-                                        <p style="color:red;">caracter(es) no permitido(s)</p>
-                                    </div>
+                                        autofocus maxlength="20"onkeyup="javascript:this.value=this.value.toUpperCase()">
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     Segundo Apellido*
                                     <input id="slastname" type="text" class="form-control" formControlName="slastname"
                                         autofocus maxlength="20"
                                         onkeyup="javascript:this.value=this.value.toUpperCase()">
-                                    <div *ngIf="RegisterUserForm.get('slastname')?.invalid">
-                                        <p style="color:red;">caracter(es) no permitido(s)</p>
-                                    </div>
                                 </div>
                             </div>
 
@@ -129,23 +102,15 @@
                                     <option selected disabled hidden style='display: none' value=''></option>
                                     <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
                                 </select>
-                            </div>
+                            </div>                           
 
                             <div class="form-group">
-                                Dia del registro*
-                                <input id="registerdate" type="date" class="form-control" formControlName="registerdate"
-                                    autofocus>
+                               
+                                    <button class="btn btn-success btn-user btn-block" type="submit"
+                                        [disabled]="!EditUserForm.valid">Actualizar</button>
+                                                       
                             </div>
-
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <button class="btn btn-success btn-user btn-block" type="submit">registrar</button>
-                                </div>
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <button class="btn btn-secondary btn-user btn-block" (click)="clear()"
-                                        type="reset">Limpiar</button>
-                                </div>
-                            </div>
+                            
                         </form>
                     </div>
                 </div>

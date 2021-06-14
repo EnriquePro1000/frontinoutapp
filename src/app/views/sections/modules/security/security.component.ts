@@ -14,7 +14,7 @@ export class SecurityComponent implements OnInit {
   admin = false;
 
   ngOnInit(): void {
-    this.user = localStorage.getItem("user");
+    this.user = localStorage.getItem("current.user");
     this.user = JSON.parse(this.user);
 
     if (this.user.role_id == 1) {
