@@ -8,18 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class EmployeesComponent implements OnInit {
 
   constructor() { }
-active = false;
-opt1 = false;
+  active = false;
+  opt1 = false;
 
   ngOnInit(): void {
-    if(localStorage.getItem("view")?.includes("employees")){
+    if (localStorage.getItem("view")?.includes("employees")) {
       this.active = true;
-      if(localStorage.getItem("view")?.includes("in-out-register")){
+      if (localStorage.getItem("view")?.includes("in-out-register")) {
         this.opt1 = true;
       }
-    }else{
+    } else {
       this.active = false;
     }
   }
-
 }

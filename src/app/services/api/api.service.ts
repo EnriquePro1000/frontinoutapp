@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ApiService {
 
-  url:string = 'http://localhost/inoutapp/api/public/api/';
+  url:string = 'http://localhost/inoutapp/api/public/api/';  
 
   headers(){
     let headers = new HttpHeaders();
@@ -17,6 +17,7 @@ export class ApiService {
     headers = headers.append("Accept", "application/json");
     return headers;
   }
+
 
   constructor() { }
 }

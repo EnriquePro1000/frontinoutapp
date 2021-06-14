@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../api/api.service'
+import { ApiService } from '../api.service'
 import { ResponseI } from '../../../interfaces/response.interface';
 import { LoginI } from '../../../interfaces/login.interface';
 import { Observable } from 'rxjs';
@@ -11,7 +11,6 @@ export class LoginService {
 
   constructor(private api:ApiService,private http:HttpClient) {}
 
-  //form post, pasa parametros del login y recibe un response
   loginByEmail(form:LoginI):Observable<ResponseI>{
     let url = this.api.url + "login";
     return this.http.post<ResponseI>(url,form);

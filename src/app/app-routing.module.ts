@@ -8,17 +8,16 @@ import { LogoutGuard } from './guards/auth/logout/logout.guard';
 //import { RegisterGuard } from './guards/register/register.guard';
 import { LoginComponent } from './views/auth/login/login.component';
 import { HomeComponent } from './views/home/home.component';
-import { CreatenewuserComponent } from './views/options/createnewuser/createnewuser.component';
-import { InoutregisterComponent } from './views/options/inoutregister/inoutregister.component';
+import { CreatenewuserComponent } from './views/options/security/createnewuser/createnewuser.component';
+import { EdituserComponent } from './views/options/security/edituser/edituser.component';
 
-const routes:Routes = [
- // {path: '', component: LoginComponent},
-  {path: '', component: LoginComponent,canActivate: [LoginGuard]},
-  {path: 'home', component: HomeComponent,canActivate: [LogoutGuard]},
-  {path: 'create-new-user', component: CreatenewuserComponent,canActivate: [LogoutGuard]},
-  {path: 'in-out-register', component: InoutregisterComponent,canActivate: [LogoutGuard]},
-  ];
-  
+const routes: Routes = [
+  { path: '', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [LogoutGuard] },
+  { path: 'create-new-user', component: CreatenewuserComponent, canActivate: [LogoutGuard] },
+  { path: 'edit-user/:id', component: EdituserComponent, canActivate: [LogoutGuard] },
+];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

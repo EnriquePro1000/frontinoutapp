@@ -14,8 +14,8 @@ import { FooterComponent } from './views/sections/footer/footer.component';
 import { SidebarComponent } from './views/sections/sidebar/sidebar.component';
 import { SecurityComponent } from './views/sections/modules/security/security.component';
 import { EmployeesComponent } from './views/sections/modules/employees/employees.component';
-import { CreatenewuserComponent } from './views/options/createnewuser/createnewuser.component';
-import { InoutregisterComponent } from './views/options/inoutregister/inoutregister.component';
+import { CreatenewuserComponent } from './views/options/security/createnewuser/createnewuser.component';
+import { EdituserComponent } from './views/options/security/edituser/edituser.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +28,12 @@ import { InoutregisterComponent } from './views/options/inoutregister/inoutregis
     SecurityComponent,
     EmployeesComponent,
     CreatenewuserComponent,
-    InoutregisterComponent
+    EdituserComponent,
   ],
   imports: [
     routing,
     AppRoutingModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     HttpClientModule,
     HttpClientModule,
     BrowserModule,

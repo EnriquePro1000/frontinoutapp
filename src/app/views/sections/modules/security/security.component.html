@@ -1,25 +1,30 @@
-<li class="nav-item active" *ngIf="active == true">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSecurity"
-        aria-expanded="true" aria-controls="collapseSecurity">
-        <i></i>
-        <span>Security</span>
-    </a>
-    <div id="collapseSecurity" class="collapse show" aria-labelledby="headingSecurity" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item active" *ngIf="opt1 == true" routerLink="/create-new-user">Create New User</a>
-            <a class="collapse-item" *ngIf="opt1 == false" routerLink="/create-new-user">Create New User</a>        </div>
-    </div>
-</li>
-
-<li class="nav-item" *ngIf="active == false">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSecurity"
-        aria-expanded="true" aria-controls="collapseSecurity">
-        <i></i>
-        <span>Security</span>
-    </a>
-    <div id="collapseSecurity" class="collapse" aria-labelledby="headingSecurity" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" routerLink="/create-new-user">Create New User</a>
+<div *ngIf="admin == true">
+    <li class="nav-item active" *ngIf="active == true">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSecurity"
+            aria-expanded="true" aria-controls="collapseSecurity">
+            <i></i>
+            <span>Seguridad</span>
+        </a>
+        <div id="collapseSecurity" class="collapse show" aria-labelledby="headingSecurity"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item active" *ngIf="opt1 == true" routerLink="/create-new-user">Crear Nuevo
+                    Usuario</a>
+                <a class="collapse-item" *ngIf="opt1 == false" routerLink="/create-new-user">Crear Nuevo Usuario</a>
+            </div>
         </div>
-    </div>
-</li>
+    </li>
+
+    <li class="nav-item" *ngIf="active == false">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSecurity"
+            aria-expanded="true" aria-controls="collapseSecurity">
+            <i></i>
+            <span>Seguridad</span>
+        </a>
+        <div id="collapseSecurity" class="collapse" aria-labelledby="headingSecurity" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" routerLink="/create-new-user">Crear Nuevo Usuario</a>
+            </div>
+        </div>
+    </li>
+</div>

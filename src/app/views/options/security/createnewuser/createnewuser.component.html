@@ -1,0 +1,172 @@
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/home">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <app-sidebar></app-sidebar>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Header -->
+                <app-header></app-header>
+                <!-- End of Header -->
+
+                <!-- Begin Page Content -->
+
+                <div class="container-fluid">
+                    <div class="col-lg-4" style="margin: 0 auto;">
+
+                        <div class="form-group" *ngIf="error">
+                            <span class="help-block">
+                                <strong>{{msj}}</strong>
+                            </span>
+                        </div>
+                        <div class="form-group" *ngIf="exit">
+                            <span class="help-block">
+                                <strong>{{msj}}</strong>
+                            </span>
+                        </div>
+
+                        <form [formGroup]="RegisterUserForm" (ngSubmit)="onRegisterUser(RegisterUserForm.value)">
+
+                            <div class="form-group">
+                                País*
+                                <select type=text id="countryid" formControlName="countryid" class="form-control"
+                                    autofocus>
+                                    <option selected disabled hidden style='display: none' value=''></option>
+                                    <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Tipo*
+                                    <select type=text id="typeid" formControlName="typeid" class="form-control"
+                                        autofocus>
+                                        <option selected disabled hidden style='display: none' value=''></option>
+                                        <option *ngFor="let typeid of typeids" value="{{typeid.id}}">{{typeid.abbrev}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    identificación*
+                                    <input id="numberid" type="text" class="form-control" formControlName="numberid"
+                                        autofocus maxlength="20">
+                                    <div *ngIf="RegisterUserForm.get('numberid')?.invalid">
+                                        <p style="color:red;">caracter(es) no permitido(s)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Primer nombre*
+                                    <input id="firstname" type="text" class="form-control" formControlName="firstname"
+                                        autofocus maxlength="20"
+                                        onkeyup="javascript:this.value=this.value.toUpperCase()">
+                                    <div *ngIf="RegisterUserForm.get('firstname')?.invalid">
+                                        <p style="color:red;">caracter(es) no permitido(s)</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Otros nombres
+                                    <input id="othername" type="text" class="form-control" formControlName="othername"
+                                        autofocus maxlength="50"
+                                        onkeyup="javascript:this.value=this.value.toUpperCase()">
+                                    <div *ngIf="RegisterUserForm.get('othername')?.invalid">
+                                        <p style="color:red;">caracter(es) no permitido(s)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Primer Apellido*
+                                    <input id="flastname" type="text" class="form-control" formControlName="flastname"
+                                        autofocus maxlength="20"
+                                        onkeyup="javascript:this.value=this.value.toUpperCase()">
+                                    <div *ngIf="RegisterUserForm.get('flastname')?.invalid">
+                                        <p style="color:red;">caracter(es) no permitido(s)</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    Segundo Apellido*
+                                    <input id="slastname" type="text" class="form-control" formControlName="slastname"
+                                        autofocus maxlength="20"
+                                        onkeyup="javascript:this.value=this.value.toUpperCase()">
+                                    <div *ngIf="RegisterUserForm.get('slastname')?.invalid">
+                                        <p style="color:red;">caracter(es) no permitido(s)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                Area de trabajo*
+                                <select type=text formControlName="areaid" class="form-control" autofocus>
+                                    <option selected disabled hidden style='display: none' value=''></option>
+                                    <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                Dia del registro*
+                                <input id="registerdate" type="date" class="form-control" formControlName="registerdate"
+                                    autofocus>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <button class="btn btn-success btn-user btn-block" type="submit">registrar</button>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <button class="btn btn-secondary btn-user btn-block" (click)="clear()"
+                                        type="reset">Limpiar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- End of page content -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <app-footer></app-footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas">⇧</i>
+    </a>
+</body>
