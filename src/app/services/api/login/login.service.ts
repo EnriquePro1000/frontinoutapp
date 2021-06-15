@@ -21,7 +21,4 @@ export class LoginService {
     let url = this.api.url + "logout";
     return this.http.get<ResponseI>(url,{headers});
   }
-
-
-
 }

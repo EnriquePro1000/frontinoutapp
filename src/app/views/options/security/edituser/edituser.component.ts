@@ -54,22 +54,25 @@ export class EdituserComponent implements OnInit {
 
     this.api.EditUser(this.id, form).subscribe(data => {
       let dataResponse: ResponseI = data;
-      if (dataResponse.status == "200") {
+      if (dataResponse.data.status == "200") {
         this.error = false;
         this.exit = true;
-        this.msj = dataResponse.result;
+        this.msj = dataResponse.data.detail_es;
+        console.log("EditUserSuccess:" + dataResponse.data.detail_en);
 
-        this.api.GetAllUsers().subscribe(data => {
+        this.api.GetUsers().subscribe(data => {
           let dataResponse: ResponseI = data;
-          localStorage.setItem("users", JSON.stringify(dataResponse.users))
+          localStorage.setItem("users", JSON.stringify(dataResponse.data.users))
+          console.log("GetUserSuccess:" + dataResponse.data.detail_en);
           setTimeout('window.location.href="/home"', 500);
         })
 
       }
-      if (dataResponse.status == "204") {
+      if (dataResponse.data.status == "422") {
         this.error = true;
         this.exit = false;
-        this.msj = dataResponse.result;
+        this.msj = dataResponse.data.detail_es;
+        console.log("EditUserFail:" + dataResponse.data.detail_en);
       }
     });
   }

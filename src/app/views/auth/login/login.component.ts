@@ -30,19 +30,22 @@ export class LoginComponent implements OnInit {
     this.api.loginByEmail(form).subscribe(data => {
       let dataResponse: ResponseI = data;
 
-      if (dataResponse.status == "200") {
-        localStorage.setItem("auth.token", dataResponse.token);
-        localStorage.setItem("current.user", JSON.stringify(dataResponse.user));
-        localStorage.setItem("typeids", JSON.stringify(dataResponse.typeids))
-        localStorage.setItem("areas", JSON.stringify(dataResponse.areas))
-        localStorage.setItem("countries", JSON.stringify(dataResponse.countries))
-        localStorage.setItem("users", JSON.stringify(dataResponse.users))
+      if (dataResponse.data.status == "200") {
+        localStorage.setItem("auth.token", dataResponse.data.token);
+        localStorage.setItem("current.user", JSON.stringify(dataResponse.data.user));
+        localStorage.setItem("typeids", JSON.stringify(dataResponse.data.typeids))
+        localStorage.setItem("areas", JSON.stringify(dataResponse.data.areas))
+        localStorage.setItem("countries", JSON.stringify(dataResponse.data.countries))
+        localStorage.setItem("users", JSON.stringify(dataResponse.data.users))
+        console.log("LoginSuccess:" + dataResponse.data.detail_en);
         window.location.href="/home"
+        
       }
 
-      if (dataResponse.status == "204") {
+      if (dataResponse.data.status == "204") {
         this.error = true;
-        this.msj = dataResponse.result;
+        this.msj = dataResponse.data.detail_es;
+        console.log("LoginFail:" + dataResponse.data.detail_en);
       }
     });
   }

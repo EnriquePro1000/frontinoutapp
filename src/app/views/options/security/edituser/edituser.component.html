@@ -35,10 +35,7 @@
                             </span>
                         </div>
 
-                        <form [formGroup]="EditUserForm"  (ngSubmit)="onEditUser(EditUserForm.value)"
-                            errorTailor>
-
-                     
+                        <form [formGroup]="EditUserForm" (ngSubmit)="onEditUser(EditUserForm.value)" errorTailor>
 
                             <div class="form-group">
                                 País*
@@ -71,7 +68,7 @@
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     Primer nombre*
                                     <input id="firstname" type="text" class="form-control" formControlName="firstname"
-                                        autofocus maxlength="20" 
+                                        autofocus maxlength="20"
                                         onkeyup="javascript:this.value=this.value.toUpperCase()">
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -86,7 +83,8 @@
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     Primer Apellido*
                                     <input id="flastname" type="text" class="form-control" formControlName="flastname"
-                                        autofocus maxlength="20"onkeyup="javascript:this.value=this.value.toUpperCase()">
+                                        autofocus maxlength="20"
+                                        onkeyup="javascript:this.value=this.value.toUpperCase()">
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     Segundo Apellido*
@@ -102,15 +100,15 @@
                                     <option selected disabled hidden style='display: none' value=''></option>
                                     <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
                                 </select>
-                            </div>                           
+                            </div>
 
                             <div class="form-group">
-                               
-                                    <button class="btn btn-success btn-user btn-block" type="submit"
-                                        [disabled]="!EditUserForm.valid">Actualizar</button>
-                                                       
+
+                                <button class="btn btn-success btn-user btn-block" type="submit"
+                                    [disabled]="!EditUserForm.valid">Actualizar</button>
+
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>

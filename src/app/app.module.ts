@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import {UnauthorizedInterceptor} from './interceptors/unauthorized.interceptor'
+import { UnauthorizedInterceptor } from './interceptors/unauthorized.interceptor'
 
 import { LoginComponent } from './views/auth/login/login.component';
 import { HomeComponent } from './views/home/home.component';
@@ -51,9 +51,9 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
   ],
   providers: [
     {
-      provide : HTTP_INTERCEPTORS,
+      provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,
-      multi   : true
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

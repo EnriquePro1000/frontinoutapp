@@ -8,7 +8,7 @@ import { LoginComponent } from './views/auth/login/login.component';
 
 
 const appRoutes = [  
-  {path: '**', pathMatch: 'full',redirectTo:''},
+  {path: '**', pathMatch: 'full' ,redirectTo:''},
 ];
 export const routing = RouterModule.forRoot(appRoutes);
 

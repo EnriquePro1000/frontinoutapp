@@ -21,8 +21,8 @@ export class HeaderComponent implements OnInit {
     this.api.logout().subscribe(data => {
       let dataResponse: ResponseI = data;
 
-      if (dataResponse.status == "200") {
-        console.log(data)
+      if (dataResponse.data.status == "200") {
+        console.log("LogoutSuccess:" + dataResponse.data.detail_en);
         localStorage.clear()
         window.location.href = "/login"
       }

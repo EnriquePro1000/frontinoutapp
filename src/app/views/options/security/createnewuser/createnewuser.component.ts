@@ -51,23 +51,25 @@ export class CreatenewuserComponent implements OnInit {
     this.api.RegisterUser(form).subscribe(data => {
       let dataResponse: ResponseI = data;
 
-      if (dataResponse.status == "200") {
+      if (dataResponse.data.status == "200") {
         this.error = false;
         this.exit = true;
-        this.msj = dataResponse.result;
-        this.api.GetAllUsers().subscribe(data => {
+        this.msj = dataResponse.data.detail_es;
+        console.log("CreateUserSuccess:" + dataResponse.data.detail_en);
+        this.api.GetUsers().subscribe(data => {
           let dataResponse: ResponseI = data;
-          localStorage.setItem("users", JSON.stringify(dataResponse.users))
+          localStorage.setItem("users", JSON.stringify(dataResponse.data.users))
+          console.log("GetUserSuccess:" + dataResponse.data.detail_en);
         })
         setTimeout('window.location.reload()', 500);
       }
 
-      if (dataResponse.status == "204") {
+      if (dataResponse.data.status == "204" || dataResponse.data.status == "422") {
         this.error = true;
         this.exit = false;
-        this.msj = dataResponse.result;
+        this.msj = dataResponse.data.detail_es;
+        console.log("RegisterUserFail:" + dataResponse.data.detail_en);
       }
-
     });
   }
 

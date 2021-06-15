@@ -5,7 +5,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <app-sidebar></app-sidebar>           
+            <app-sidebar></app-sidebar>
         </ul>
         <!-- End of Sidebar -->
 
@@ -36,7 +36,7 @@
                                     <button type="button" class="close" data-dismiss="alert"></button>
                                     <b>{{msj}}</b>
                                 </div>
-                                
+
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -44,8 +44,8 @@
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
                                             <th>País</th>
+                                            <th>Area</th>
                                             <th>Correo Electronico</th>
-                                          <!--<th>Estado</th>-->
                                             <th>Eliminar</th>
                                         </tr>
                                     </thead>
@@ -55,8 +55,8 @@
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
                                             <th>País</th>
+                                            <th>Area</th>
                                             <th>Correo Electronico</th>
-                                            <!--<th>Estado</th>-->
                                             <th>Eliminar</th>
                                         </tr>
                                     </tfoot>
@@ -66,12 +66,9 @@
                                                     style="color:blue;">{{user.numberid}}</u></td>
                                             <td>{{user.firstname}} {{user.othername}}</td>
                                             <td>{{user.flastname}} {{user.slastname}}</td>
-
                                             <td>{{user.country_name}}</td>
-
+                                            <td>{{user.area_name}}</td>
                                             <td>{{user.email}}</td>
-                                            <!--<td *ngIf="user.active == true">activo</td>
-                                            <td *ngIf="user.active == false">inactivo</td>-->
                                             <td>
 
                                                 <div class="col-sm-6 mb-3 mb-sm-0">

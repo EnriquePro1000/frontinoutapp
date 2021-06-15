@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   }
 
   chargeHome() {
-    window.location.href="/home"
+    window.location.href = "/home"
   }
 
 }
